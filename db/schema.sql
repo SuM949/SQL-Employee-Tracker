@@ -28,3 +28,23 @@ CREATE TABLE employee (
   manager_id INT NULL,
   PRIMARY KEY (id)
 );
+
+
+CREATE TABLE role (
+  id INT NOT NULL AUTO_INCREMENT,
+  title VARCHAR(45) NULL,
+  salary DECIMAL(10.3) NULL,
+  department_id INT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE manager .(
+  id INT NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(45) NULL,
+  last_name VARCHAR(45) NULL,
+  role_id INT NULL,
+  FOREIGN KEY(role_id)
+  REFERENCES role(id),
+  manager_id INT NULL,
+  PRIMARY KEY (id)
+);
