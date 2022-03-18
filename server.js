@@ -15,7 +15,7 @@ const Connection = mysql.createConnection({
     //PASSWORD
     password:"password",
     database:"employee_db"
-});
+})
 
 //Connect to my sql and database 
 Connection.connect(function(err){
@@ -24,7 +24,7 @@ Connection.connect(function(err){
 
     //add start function here 
     start();
-})
+}),
 
 
 // Basic functionality of application

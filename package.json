@@ -18,5 +18,10 @@
   "homepage": "https://github.com/SuM949/SQL-Employee-Tracker#readme",
   "devDependencies": {
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.1",
+    "mysql": "^2.18.1"
   }
 }
