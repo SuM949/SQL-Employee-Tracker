@@ -1,9 +1,9 @@
-//Dependencies 
+// Dependencies 
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const cTable = require("console.table");
 
-//Connection information for sql database 
+// Connection information for sql database 
 const Connection = mysql.createConnection({
     host:"localhost",
 
@@ -14,7 +14,7 @@ const Connection = mysql.createConnection({
 
     //PASSWORD
     password:"password",
-    database:"employee_db"
+    database:"employeesDB"
 })
 
 //Connect to my sql and database 
@@ -22,7 +22,7 @@ Connection.connect(function(err){
     if(err) throw err;
     console.log("SQL connected");
 
-    //add start function here 
+    // //add start function here 
     start();
 }),
 
