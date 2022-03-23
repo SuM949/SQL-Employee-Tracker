@@ -1,7 +1,7 @@
 // Dependencies 
 const inquirer = require("inquirer");
-const mysql = require("mysql");
-const cTable = require("console.table");
+const mysql = require("mysql2");
+ require("console.table");
 
 // Connection information for sql database 
 const Connection = mysql.createConnection({
@@ -14,7 +14,7 @@ const Connection = mysql.createConnection({
 
     //PASSWORD
     password:"password",
-    database:"employeesDB"
+    database:"employees_db"
 })
 
 //Connect to my sql and database 
@@ -22,10 +22,10 @@ Connection.connect(function(err){
     if(err) throw err;
     console.log("SQL connected");
 
-    // //add start function here 
-    start();
+   
 }),
 
+ start();
 
 // Basic functionality of application
 function start () {
@@ -34,12 +34,12 @@ function start () {
            {
              type:"list",
              name: "start",
-             message:"we have information on employees, departments, and employee roles. when would you like to do?",
+             message:"we have information on employees, departments, and employee role. when would you like to do?",
              choices:["View","Add","Update","Exit"]
             }
          ]).then(function(res){
            switch(res.start){
-            case"view":
+            case"View":
                  view();
                  break;
              case"Add":
@@ -85,7 +85,7 @@ function view(){
       });
 
       function viewAllEmployees(){
-        Connection.query("SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS Salary, m.last_name AS Manager, d.name AS Department FROM employee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e.role_id = r.title LEFT JOIN departments d ON r. department_id = d.id", function(err, results){
+        Connection.query("SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS Salary, m.last_name AS Manager, d.name AS Department FROM employee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e.role_id = r.title LEFT JOIN departments ON r. department_id = d.id", function(err, results){
             if(err) throw err;
             console.table(results);
             start();
@@ -192,7 +192,7 @@ function add(){
              }
           ]).then(function(answer){
               Connection.query(
-              "INSERT INFO departments VALUES (DEFAULT,?)",
+              "INSERT INTO department(name) VALUES (?)",
               [answer.department],
               function(err){
                   if(err) throw err;
