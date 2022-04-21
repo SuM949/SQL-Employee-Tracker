@@ -8,11 +8,11 @@ VALUES (1,"Marketing"),
 
 INSERT INTO role (id, title, salary, department_id)
 VALUES 
- (1,"Marketing Lead", 100000, 1),
- (2,"Lead Engineer", 150000, 2),
- (3,"Software Engineer", 120000, 2),
- (4,"Accountant", 125000, 3),
- (5,"Legal Team Lead", 250000, 4);
+(1,"Marketing Lead", 100000, 1),
+(2,"Lead Engineer", 150000, 2),
+(3,"Software Engineer", 120000, 2),
+(4,"Accountant", 125000, 3),
+(5,"Legal Team Lead", 250000, 4);
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES (1,"Maryama", "Gure", 1, 3),

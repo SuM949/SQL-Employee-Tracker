@@ -62,30 +62,30 @@ function start () {
 //  view function set
 function view(){
     inquirer
-      .prompt([
-         {
-             type:"list",
-             name:"view",
-             message:"select one to view",
-             choices:["All employees","By department","By role"]
-         }
-      ]).then(function(res){
-          switch(res.view){
-              case "All employees":
-                  viewAllEmployees();
-                  break;
-             case "By department":
-                 viewByDepartment();
-                 break
+    .prompt([
+        {
+            type:"list",
+            name:"view",
+        message:"select one to view",
+        choices:["All employees","By department","By role"]
+        }
+    ]).then(function(res){
+        switch(res.view){
+        case "All employees":
+            viewAllEmployees();
+                break;
+            case "By department":
+            viewByDepartment();
+        break
             case "By role":
                 viewByrole();
-             default:
-                 console.log("default");
-          }
-      });
+        default:
+        console.log("default");
+        }
+    });
 
-      function viewAllEmployees(){
-        Connection.query("SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS Salary, m.last_name AS Manager, d.name AS Department FROM employee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e.role_id = r.title LEFT JOIN departments ON r. department_id = d.id", function(err, results){
+    function viewAllEmployees(){
+        Connection.query("SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS Salary, m.last_name AS Manager, d.name AS Department FROM employee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e.role_id = r.title LEFT JOIN department ON r. department_id = d.id", function(err, results){
             if(err) throw err;
             console.table(results);
             start();
@@ -197,7 +197,7 @@ function add(){
               function(err){
                   if(err) throw err;
                   console.log("-----------------------------");
-                  console.log("Departments updated with"+ answer.department);
+                  console.log("Department updated with"+ answer.department);
                   console.log("-----------------------------");
                   start();
              
