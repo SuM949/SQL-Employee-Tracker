@@ -85,7 +85,7 @@ function view(){
     });
 
     function viewAllEmployees(){
-        Connection.query("SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS Salary, m.last_name AS Manager, d.name AS Department FROM employee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e.role_id = r.title LEFT JOIN department ON r. department_id = d.id", function(err, results){
+        Connection.query("SELECT * FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id", function(err, results){
             if(err) throw err;
             console.table(results);
             start();
@@ -96,34 +96,12 @@ function view(){
           // query database for all departments 
           Connection.query("SELECT  * FROM department", function(err, results){
               if(err) throw err;
-              // once you have the departments, prompt user for which they chose 
-              inquirer 
-                 .prompt([
-                   {
-                    name:"choice",
-                    type:"rawlist",
-                    choices: function(){
-                      let choiceArr = [];
-                      for(i=0; i< results.length; i++){
-                          choiceArr.push(results[i].name);
-                      }
-                      return choiceArr;
-                    },
-                    message: "Select department"
-                }
-               ]).then(function(answer){
-                   Connection.query(
-                       "SELECT e.id AS ID, e.first_name AS First, e.last_name AS Last, e.role_id AS Role, r.salary AS salary, m.last_name AS Manager, d.name AS Department FROM employee e LEFT JOIN employee m ON e.manager_id = m.id LEFT JOIN role r ON e.role_id = r.title LEFT JOIN department d ON r.department_id = d.id WHERE d.name =? ", [answer.choice],function(err,results)
-                       {
-                           if(err) throw err;
                            console.table(results);
                            start();
                        }
                    )
-               });
-          });
-      }
-}
+               };
+          };
 function viewByrole(){
     //query database for all departments
     Connection.query("SELECT title FROM role", function(err, results){
@@ -327,7 +305,7 @@ function updateEmployee(){
                {
              name: "choices",
              type: "rawlist",
-             Choices: function(){
+             choices: function(){
                  let choiceArr = [];
                  for(i=0; i< results.length; i++){
                      choiceArr.push(results[i].last_name);
@@ -341,7 +319,7 @@ function updateEmployee(){
                //SaveName is employee
                const SaveName = answer.choice;
 
-               Connection.query("SELECT * FROM employee",
+               Connection.query("SELECT * FROM role",
                function(err, results){
                    if(err) throw err;
 
@@ -353,7 +331,7 @@ function updateEmployee(){
                         choices: function(){
                             var choiceArr =[];
                             for(i=0; i< results.length; i++){
-                                choiceArr.push(results[i].role_id)
+                                choiceArr.push(results[i].title)
                             }
                             return choiceArr;
                         },
