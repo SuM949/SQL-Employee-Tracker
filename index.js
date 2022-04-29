@@ -225,7 +225,7 @@ function addEmployeeRole(){
                 department_id:answer.department_id
             },
             function(err){
-                if(err) throw err;
+                // if(err) throw err;
                 console.log("-----------------------------");
                   console.log("Employee Roles updated with"+ answer.role);
                   console.log("-----------------------------");
